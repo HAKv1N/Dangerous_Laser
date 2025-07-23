@@ -19431,7 +19431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7630f61e9301a5447b2fa0915aab49c9, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6602745430640348917, guid: 7630f61e9301a5447b2fa0915aab49c9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -19583,7 +19583,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7630f61e9301a5447b2fa0915aab49c9, type: 3}
       propertyPath: m_Name
-      value: Sci-Fi 1
+      value: Sci-Fi
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7630f61e9301a5447b2fa0915aab49c9, type: 3}
+      propertyPath: m_TagString
+      value: Item
       objectReference: {fileID: 0}
     - target: {fileID: 3316992658331686828, guid: 7630f61e9301a5447b2fa0915aab49c9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19879,6 +19883,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7630f61e9301a5447b2fa0915aab49c9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5695028488692916964}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7630f61e9301a5447b2fa0915aab49c9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7974236149974687263}
   m_SourcePrefab: {fileID: 100100000, guid: 7630f61e9301a5447b2fa0915aab49c9, type: 3}
 --- !u!4 &3734467799944536475 stripped
 Transform:
@@ -19902,10 +19909,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958be29894028cb45b9a3049411e746f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxAmmo: 15
-  _currentAmmo: 15
+  recoilSettings:
+    _verticalRecoil: 10
+    _horizontalRecoil: 2
+  _maxAmmo: 10
+  _currentAmmo: 10
   _isAutomatically: 0
-  _fireRate: 0.5
+  _fireRate: 1
   _range: 15
   _damage: 15
   _reloadRate: 0.8
@@ -19916,6 +19926,8 @@ MonoBehaviour:
   _audioSource: {fileID: 2347337686650198728}
   _muzzle: {fileID: 2687908675532533569}
   _gunAnimator: {fileID: 5695028488692916964}
+  _gunIcon: {fileID: 21300000, guid: 359ff12bce40b28469994e53eb3a304f, type: 3}
+  _gunPrefab: {fileID: 4078200782076541729}
 --- !u!120 &627800405634302264
 LineRenderer:
   serializedVersion: 2
@@ -20142,3 +20154,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &7974236149974687263
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4078200782076541729}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 5, z: 7}
+  m_Center: {x: 0, y: 0, z: 0}

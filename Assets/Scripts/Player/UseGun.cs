@@ -7,16 +7,16 @@ public class UseGun : MonoBehaviour
     [SerializeField] private Transform _playerHand;
 
     [HideInInspector] public GunInfo gunInfo;
-    private UpdateUI updateUI;
     private float _nextFireTime;
     private Transform cameraTransform;
     private bool _canShoot = true;
     private bool _canReload = true;
+    private PlayerController playerController;
 
     private void Start()
     {
-        updateUI = FindFirstObjectByType<UpdateUI>();
         cameraTransform = FindFirstObjectByType<Camera>().GetComponent<Transform>();
+        playerController = GetComponent<PlayerController>();
     }
 
     private void Update()
@@ -31,6 +31,8 @@ public class UseGun : MonoBehaviour
         {
             gunInfo = _playerHand.GetComponentInChildren<GunInfo>();
         }
+
+        else return;
 
         if (_canShoot)
         {
@@ -79,6 +81,8 @@ public class UseGun : MonoBehaviour
             }
         }
 
+        Recoil();
+
         gunInfo._gunLine.SetPosition(1, shootRay.origin + shootRay.direction * gunInfo._range);
         gunInfo._audioSource.clip = gunInfo._soundShoot;
         gunInfo._audioSource.Play();
@@ -87,7 +91,6 @@ public class UseGun : MonoBehaviour
         StartCoroutine(DisableGunLine(0.07f));
 
         gunInfo._currentAmmo--;
-        updateUI.UpdateUIVisual();
     }
 
     IEnumerator DisableGunLine(float time)
@@ -120,7 +123,13 @@ public class UseGun : MonoBehaviour
         _canReload = true;
         gunInfo._currentAmmo = gunInfo._maxAmmo;
         gunInfo._gunAnimator.SetBool("Reload", false);
+    }
 
-        updateUI.UpdateUIVisual();
+    private void Recoil()
+    {
+        playerController.rotationX -= gunInfo.recoilSettings._verticalRecoil;
+
+        float horizontalRecoil = Random.Range(-gunInfo.recoilSettings._horizontalRecoil, gunInfo.recoilSettings._horizontalRecoil);
+        playerController.transform.Rotate(0, horizontalRecoil, 0);
     }
 }

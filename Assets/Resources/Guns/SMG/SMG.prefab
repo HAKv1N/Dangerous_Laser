@@ -19437,6 +19437,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SMG
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ed0aec93187b72541bb53dc4b0ceda30, type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -19456,6 +19460,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ed0aec93187b72541bb53dc4b0ceda30, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2747671245604314032}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ed0aec93187b72541bb53dc4b0ceda30, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 593076084917315256}
   m_SourcePrefab: {fileID: 100100000, guid: ed0aec93187b72541bb53dc4b0ceda30, type: 3}
 --- !u!4 &3787918011469359107 stripped
 Transform:
@@ -19479,6 +19486,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958be29894028cb45b9a3049411e746f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recoilSettings:
+    _verticalRecoil: 1.5
+    _horizontalRecoil: 0.5
   _maxAmmo: 30
   _currentAmmo: 30
   _isAutomatically: 1
@@ -19493,6 +19503,8 @@ MonoBehaviour:
   _audioSource: {fileID: 1502658559374728038}
   _muzzle: {fileID: 6988137078479438979}
   _gunAnimator: {fileID: 2747671245604314032}
+  _gunIcon: {fileID: 21300000, guid: 3ecbeb39b6523754cb737e40eb886c56, type: 3}
+  _gunPrefab: {fileID: 4601187813447119545}
 --- !u!82 &1502658559374728038
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19719,3 +19731,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!65 &593076084917315256
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4601187813447119545}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.03, y: 0.11, z: 0.3}
+  m_Center: {x: 0, y: 0, z: 0}
