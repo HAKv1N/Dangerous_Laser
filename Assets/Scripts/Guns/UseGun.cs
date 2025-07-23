@@ -11,6 +11,7 @@ public class UseGun : MonoBehaviour
     private float _nextFireTime;
     private Transform cameraTransform;
     private bool _canShoot = true;
+    private bool _canReload = true;
 
     private void Start()
     {
@@ -82,6 +83,7 @@ public class UseGun : MonoBehaviour
         gunInfo._audioSource.clip = gunInfo._soundShoot;
         gunInfo._audioSource.Play();
         gunInfo._gunEffects.Play();
+        gunInfo._gunAnimator.SetBool("Shoot", true);
         StartCoroutine(DisableGunLine(0.07f));
 
         gunInfo._currentAmmo--;
@@ -93,11 +95,12 @@ public class UseGun : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         gunInfo._gunLine.enabled = false;
+        gunInfo._gunAnimator.SetBool("Shoot", false);
     }
 
     private void Reload()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && _canReload && gunInfo._currentAmmo < gunInfo._maxAmmo)
         {
             StartCoroutine(StartReload(gunInfo._reloadRate));
         }
@@ -107,12 +110,16 @@ public class UseGun : MonoBehaviour
     {
         gunInfo._audioSource.clip = gunInfo._soundReload;
         gunInfo._audioSource.Play();
+        gunInfo._gunAnimator.SetBool("Reload", true);
         _canShoot = false;
+        _canReload = false;
 
         yield return new WaitForSeconds(_reloadRate);
 
         _canShoot = true;
+        _canReload = true;
         gunInfo._currentAmmo = gunInfo._maxAmmo;
+        gunInfo._gunAnimator.SetBool("Reload", false);
 
         updateUI.UpdateUIVisual();
     }

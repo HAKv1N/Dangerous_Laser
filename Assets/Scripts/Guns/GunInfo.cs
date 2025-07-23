@@ -15,4 +15,5 @@ public class GunInfo : MonoBehaviour
     public AudioClip _soundReload;
     public AudioSource _audioSource;
     public Transform _muzzle;
+    public Animator _gunAnimator;
 }
