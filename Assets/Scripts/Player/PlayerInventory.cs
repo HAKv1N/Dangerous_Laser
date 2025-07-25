@@ -8,11 +8,8 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private Transform inventoryTransform;
     [SerializeField] private Transform inventoryUI;
 
-    [Header("Value")]
-    [SerializeField] private float _rangeCheckItem;
-    [SerializeField] private int _maxItemsOnInventory;
-
     private Transform cameraTransform;
+    private PlayerStats playerStats;
     private List<GameObject> items = new List<GameObject>();
     private List<InventorySlot> inventorySlots = new List<InventorySlot>();
     private GameObject currentItem;
@@ -20,6 +17,7 @@ public class PlayerInventory : MonoBehaviour
     private void Start()
     {
         cameraTransform = FindFirstObjectByType<Camera>().GetComponent<Transform>();
+        playerStats = GetComponent<PlayerStats>();
 
         InitializeSlots();
     }
@@ -35,18 +33,20 @@ public class PlayerInventory : MonoBehaviour
         Ray rayCheckItem = new Ray(cameraTransform.position, cameraTransform.forward);
         RaycastHit itemHit;
 
-        if (Physics.Raycast(rayCheckItem, out itemHit, _rangeCheckItem))
+        if (Physics.Raycast(rayCheckItem, out itemHit, playerStats._rangeCheckItem))
         {
-            if (itemHit.collider.CompareTag("Item") && Input.GetKeyDown(KeyCode.E) && items.Count < _maxItemsOnInventory)
+            if (itemHit.collider.CompareTag("Item") && Input.GetKeyDown(KeyCode.E) && items.Count < playerStats._maxItemsOnInventory)
             {
                 AddItemToInventory(itemHit.collider.transform);
+
+                return;
             }
         }
     }
 
     private void AddItemToInventory(Transform item)
     {
-        if (items.Count > _maxItemsOnInventory) return;
+        if (items.Count > playerStats._maxItemsOnInventory) return;
 
         items.Add(item.gameObject);
         item.gameObject.SetActive(false);
@@ -98,7 +98,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void InitializeSlots()
     {
-        for (int i = 0; i < _maxItemsOnInventory; i++)
+        for (int i = 0; i < playerStats._maxItemsOnInventory; i++)
         {
             InventorySlot inventorySlot = inventoryUI.GetChild(i).GetComponent<InventorySlot>();
             inventorySlots.Add(inventorySlot);

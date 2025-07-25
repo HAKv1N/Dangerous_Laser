@@ -21,10 +21,6 @@ public class GunInfo : MonoBehaviour
     public Transform _muzzle;
     public Animator _gunAnimator;
     public Sprite _gunIcon;
-
-    [Space]
-
-    public GameObject _gunPrefab;
 }
 
 [System.Serializable]

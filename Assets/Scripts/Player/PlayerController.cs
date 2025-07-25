@@ -2,18 +2,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Value")]
-    [SerializeField] private float _speed;
-    [SerializeField] private float _sensitivity;
-    [SerializeField] private float _gravity;
-    [SerializeField] private float _radiusCheckGround;
-    [SerializeField] private float _jumpPower;
-
     [Header("Objects")]
     [SerializeField] private Transform checkGround;
     [SerializeField] private LayerMask playerMask;
 
     private CharacterController characterController;
+    private PlayerStats playerStats;
     private Transform cameraTransform;
     [HideInInspector] public float rotationX;
     private Vector3 velocityDirection;
@@ -23,6 +17,7 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         cameraTransform = FindAnyObjectByType<Camera>().GetComponent<Transform>();
+        playerStats = GetComponent<PlayerStats>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -42,13 +37,13 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveDirection = transform.forward * v + transform.right * h;
 
-        characterController.Move(moveDirection.normalized * _speed * Time.deltaTime);
+        characterController.Move(moveDirection.normalized * playerStats._speed * Time.deltaTime);
     }
 
     private void FirstPerson()
     {
-        float mouseX = Input.GetAxis("Mouse X") * _sensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * _sensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * playerStats._sensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * playerStats._sensitivity;
 
         rotationX -= mouseY;
         rotationX = Mathf.Clamp(rotationX, -80, 80);
@@ -59,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     private void Velocity()
     {
-        inGround = Physics.CheckSphere(checkGround.position, _radiusCheckGround, ~playerMask);
+        inGround = Physics.CheckSphere(checkGround.position, playerStats._radiusCheckGround, ~playerMask);
 
         if (inGround && velocityDirection.y < 0)
         {
@@ -68,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
         else
         {
-            velocityDirection.y -= _gravity * Time.deltaTime;
+            velocityDirection.y -= playerStats._gravity * Time.deltaTime;
         }
 
         Jump();
@@ -80,7 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         if (inGround && Input.GetKeyDown(KeyCode.Space))
         {
-            velocityDirection.y = Mathf.Sqrt(_jumpPower * 2f * _gravity);
+            velocityDirection.y = Mathf.Sqrt(playerStats._jumpPower * 2f * playerStats._gravity);
         }
     }
 }
