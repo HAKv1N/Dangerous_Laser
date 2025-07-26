@@ -8,11 +8,14 @@ public class EnemyFunctional : MonoBehaviour
     private float _nextFireTime;
     private bool _canShoot = true;
     private bool _canReload = true;
+    private Quaternion startRotation;
 
     private void Start()
     {
         playerController = FindFirstObjectByType<PlayerController>();
         enemyInfo = GetComponent<EnemyInfo>();
+
+        startRotation = transform.localRotation;
     }
 
     private void Update()
@@ -47,12 +50,12 @@ public class EnemyFunctional : MonoBehaviour
                         return;
                     }
                 }
-
-                else
-                {
-                    
-                }
             }
+        }
+
+        else
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, startRotation, 5 * Time.deltaTime);
         }
     }
 
@@ -62,7 +65,7 @@ public class EnemyFunctional : MonoBehaviour
 
         PlayerStats playerStats = playerController.GetComponent<PlayerStats>();
 
-        playerStats._currentHP -= enemyInfo._damage;
+        playerStats.GetDamage(enemyInfo._damage);
 
         if (playerStats._currentHP <= 0)
         {

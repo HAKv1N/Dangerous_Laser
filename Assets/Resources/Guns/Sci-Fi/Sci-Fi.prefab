@@ -19915,9 +19915,9 @@ MonoBehaviour:
   _maxAmmo: 10
   _currentAmmo: 10
   _isAutomatically: 0
-  _fireRate: 1
+  _fireRate: 0.6
   _range: 15
-  _damage: 15
+  _damage: 10
   _reloadRate: 0.8
   _lineRate: 0.1
   _gunEffects: {fileID: 6902244010517717154}

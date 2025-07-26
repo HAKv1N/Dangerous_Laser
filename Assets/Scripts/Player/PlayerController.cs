@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,15 +13,22 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public float rotationX;
     private Vector3 velocityDirection;
     private bool inGround;
+    private bool isMoving;
+    private bool isRunning;
+    private float startFOV;
 
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
-        cameraTransform = FindAnyObjectByType<Camera>().GetComponent<Transform>();
+        cameraTransform = GetComponentInChildren<Camera>().GetComponent<Transform>();
         playerStats = GetComponent<PlayerStats>();
+        startFOV = cameraTransform.GetComponent<Camera>().fieldOfView;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        playerStats._currentHP = playerStats._maxHP;
+        playerStats._currentStamina = playerStats._maxStamina;
     }
 
     private void Update()
@@ -35,9 +43,32 @@ public class PlayerController : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
+        isMoving = h != 0 || v != 0;
+        isRunning = isMoving && Input.GetKey(KeyCode.LeftShift) && playerStats._currentStamina > 0;
+
         Vector3 moveDirection = transform.forward * v + transform.right * h;
 
-        characterController.Move(moveDirection.normalized * playerStats._speed * Time.deltaTime);
+        Camera playerCamera = cameraTransform.GetComponent<Camera>();
+
+        if (isRunning)
+        {
+            playerStats._currentStamina -= playerStats._staminaPerSecond * 2 * Time.deltaTime;
+            characterController.Move(moveDirection.normalized * playerStats._speed * 2 * Time.deltaTime);
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, startFOV + 10, 5 * Time.deltaTime);
+        }
+
+        else if (isMoving)
+        {
+            characterController.Move(moveDirection.normalized * playerStats._speed * Time.deltaTime);
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, startFOV + 2, 5 * Time.deltaTime);
+            playerStats._currentStamina += playerStats._staminaPerSecond * 1.2f * Time.deltaTime;
+        }
+
+        else
+        {
+            playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, startFOV, 5 * Time.deltaTime);
+            playerStats._currentStamina += playerStats._staminaPerSecond * 1.2f * Time.deltaTime;
+        }
     }
 
     private void FirstPerson()

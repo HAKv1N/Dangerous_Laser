@@ -55,11 +55,11 @@ MonoBehaviour:
   _maxAmmo: 7
   _currentAmmo: 7
   _isAutomatically: 0
-  _fireRate: 2
+  _fireRate: 1.2
   _range: 100
   _damage: 100
   _reloadRate: 4.5
-  _lineRate: 0.5
+  _lineRate: 0.7
   _gunEffects: {fileID: 1415382543972144155}
   _gunLine: {fileID: 4829029782851415962}
   _soundShoot: {fileID: 8300000, guid: 502caadeb47c81b45b779765489bbe1d, type: 3}

@@ -8,7 +8,7 @@ public class GunInfo : MonoBehaviour
 
     [Header("Value")]
     public int _maxAmmo;
-    public int _currentAmmo;
+    [HideInInspector] public int _currentAmmo;
     public bool _isAutomatically;
     public float _fireRate;
     public int _range;
@@ -27,6 +27,11 @@ public class GunInfo : MonoBehaviour
     public Transform _muzzle;
     public Animator _gunAnimator;
     public Sprite _gunIcon;
+
+    private void Awake()
+    {
+        _currentAmmo = _maxAmmo;
+    }
 }
 
 [System.Serializable]
