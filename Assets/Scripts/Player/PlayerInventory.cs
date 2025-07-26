@@ -30,16 +30,19 @@ public class PlayerInventory : MonoBehaviour
 
     private void CheckItem()
     {
-        Ray rayCheckItem = new Ray(cameraTransform.position, cameraTransform.forward);
-        RaycastHit itemHit;
-
-        if (Physics.Raycast(rayCheckItem, out itemHit, playerStats._rangeCheckItem))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (itemHit.collider.CompareTag("Item") && Input.GetKeyDown(KeyCode.E) && items.Count < playerStats._maxItemsOnInventory)
-            {
-                AddItemToInventory(itemHit.collider.transform);
+            Ray rayCheckItem = new Ray(cameraTransform.position, cameraTransform.forward);
+            RaycastHit itemHit;
 
-                return;
+            if (Physics.Raycast(rayCheckItem, out itemHit, playerStats._rangeCheckItem))
+            {
+                if (itemHit.collider.CompareTag("Item") && items.Count < playerStats._maxItemsOnInventory)
+                {
+                    AddItemToInventory(itemHit.collider.transform);
+
+                    return;
+                }
             }
         }
     }

@@ -19496,6 +19496,7 @@ MonoBehaviour:
   _range: 25
   _damage: 10
   _reloadRate: 3.5
+  _lineRate: 0.05
   _gunEffects: {fileID: 7390544132155893310}
   _gunLine: {fileID: 5064768847132600393}
   _soundShoot: {fileID: 8300000, guid: 29176e32f7642e2459b399356ed5c2e9, type: 3}
@@ -19504,7 +19505,6 @@ MonoBehaviour:
   _muzzle: {fileID: 6988137078479438979}
   _gunAnimator: {fileID: 2747671245604314032}
   _gunIcon: {fileID: 21300000, guid: 3ecbeb39b6523754cb737e40eb886c56, type: 3}
-  _gunPrefab: {fileID: 4601187813447119545}
 --- !u!82 &1502658559374728038
 AudioSource:
   m_ObjectHideFlags: 0

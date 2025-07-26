@@ -6,6 +6,7 @@ public class GunInfo : MonoBehaviour
 
     [Space]
 
+    [Header("Value")]
     public int _maxAmmo;
     public int _currentAmmo;
     public bool _isAutomatically;
@@ -13,6 +14,11 @@ public class GunInfo : MonoBehaviour
     public int _range;
     public int _damage;
     public float _reloadRate;
+    public float _lineRate;
+
+    [Space]
+
+    [Header("Objects")]
     public ParticleSystem _gunEffects;
     public LineRenderer _gunLine;
     public AudioClip _soundShoot;

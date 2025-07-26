@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class EnemyFunctional : MonoBehaviour
 {
-    private bool _isPlayerDetected;
     private PlayerController playerController;
     private EnemyInfo enemyInfo;
     private float _nextFireTime;
@@ -35,16 +34,23 @@ public class EnemyFunctional : MonoBehaviour
             {
                 if (hit.collider.CompareTag("Player"))
                 {
+                    Vector3 direction = hit.transform.position - transform.position;
+                    Quaternion targetRotation = Quaternion.LookRotation(direction);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 5 * Time.deltaTime);
+
                     if (Time.time > _nextFireTime)
                     {
-                        _isPlayerDetected = true;
-
                         ShootEnemy();
 
                         _nextFireTime = Time.time + enemyInfo._fireRate;
 
                         return;
                     }
+                }
+
+                else
+                {
+                    
                 }
             }
         }

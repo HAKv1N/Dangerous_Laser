@@ -34,24 +34,18 @@ public class UseGun : MonoBehaviour
 
         else return;
 
-        if (_canShoot)
+        if (_canShoot && Time.time >= _nextFireTime)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0) && !gunInfo._isAutomatically)
             {
-                if (Time.time >= _nextFireTime)
-                {
-                    Shoot();
-                    _nextFireTime = Time.time + gunInfo._fireRate;
-                }
+                Shoot();
+                _nextFireTime = Time.time + gunInfo._fireRate;
             }
 
             else if (Input.GetKey(KeyCode.Mouse0) && gunInfo._isAutomatically)
             {
-                if (Time.time >= _nextFireTime)
-                {
-                    Shoot();
-                    _nextFireTime = Time.time + gunInfo._fireRate;
-                }
+                Shoot();
+                _nextFireTime = Time.time + gunInfo._fireRate;
             }
         }
     }
@@ -88,7 +82,7 @@ public class UseGun : MonoBehaviour
         gunInfo._audioSource.Play();
         gunInfo._gunEffects.Play();
         gunInfo._gunAnimator.SetBool("Shoot", true);
-        StartCoroutine(DisableGunLine(0.07f));
+        StartCoroutine(DisableGunLine(gunInfo._lineRate));
 
         gunInfo._currentAmmo--;
 
