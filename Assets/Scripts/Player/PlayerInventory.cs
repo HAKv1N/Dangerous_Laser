@@ -6,20 +6,22 @@ public class PlayerInventory : MonoBehaviour
     [Header("Objects")]
     [SerializeField] private Transform playerHand;
     [SerializeField] private Transform inventoryTransform;
-    [SerializeField] private Transform inventoryUI;
+    [SerializeField] private LayerMask playerMask;
 
+    private InventoryUI inventoryUI;
     private Transform cameraTransform;
     private PlayerStats playerStats;
+    private UseGun useGun;
     private List<GameObject> items = new List<GameObject>();
-    private List<InventorySlot> inventorySlots = new List<InventorySlot>();
     private GameObject currentItem;
+    [HideInInspector] public int _currentSlotIndex = -1;
 
     private void Start()
     {
         cameraTransform = FindFirstObjectByType<Camera>().GetComponent<Transform>();
         playerStats = GetComponent<PlayerStats>();
-
-        InitializeSlots();
+        useGun = GetComponent<UseGun>();
+        inventoryUI = FindFirstObjectByType<InventoryUI>();
     }
 
     private void Update()
@@ -35,7 +37,7 @@ public class PlayerInventory : MonoBehaviour
             Ray rayCheckItem = new Ray(cameraTransform.position, cameraTransform.forward);
             RaycastHit itemHit;
 
-            if (Physics.Raycast(rayCheckItem, out itemHit, playerStats._rangeCheckItem))
+            if (Physics.Raycast(rayCheckItem, out itemHit, playerStats._rangeCheckItem, ~playerMask))
             {
                 if (itemHit.collider.CompareTag("Item") && items.Count < playerStats._maxItemsOnInventory)
                 {
@@ -62,21 +64,15 @@ public class PlayerInventory : MonoBehaviour
             TakeItemToHand(0);
         }
 
-        for (int i = 0; i < items.Count; i++)
-        {
-            GunInfo gunInfo = items[i].GetComponent<GunInfo>();
-
-            inventorySlots[i].icon.sprite = gunInfo._gunIcon;
-
-            inventorySlots[i].UpdateSlotUI(gunInfo._gunIcon, gunInfo._currentAmmo);
-        }
+        GunInfo gunInfo = item.GetComponent<GunInfo>();
+        inventoryUI.UpdateSlotUI(gunInfo._gunIcon, gunInfo._currentAmmo, items.Count - 1);
     }
 
     private void ChooseItemOnInventory()
     {
         for (int i = 0; i < items.Count; i++)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i) && useGun._canTakeItem)
             {
                 TakeItemToHand(i);
             }
@@ -87,24 +83,24 @@ public class PlayerInventory : MonoBehaviour
     {
         if (slotIndex < 0 || slotIndex >= items.Count) return;
 
-        if (currentItem != null)
+        if (currentItem != null && _currentSlotIndex >= 0)
         {
-            Destroy(currentItem);
-            currentItem = null;
+            ReturnItemToInventory(_currentSlotIndex, currentItem.GetComponent<GunInfo>());
         }
 
         currentItem = Instantiate(items[slotIndex], playerHand);
         currentItem.SetActive(true);
         currentItem.transform.localPosition = Vector3.zero;
         currentItem.transform.localRotation = Quaternion.identity;
+        currentItem.GetComponent<GunInfo>()._currentAmmo = items[slotIndex].GetComponent<GunInfo>()._currentAmmo;
+
+        _currentSlotIndex = slotIndex;
     }
 
-    private void InitializeSlots()
+    private void ReturnItemToInventory(int slotIndex, GunInfo gunInfo)
     {
-        for (int i = 0; i < playerStats._maxItemsOnInventory; i++)
-        {
-            InventorySlot inventorySlot = inventoryUI.GetChild(i).GetComponent<InventorySlot>();
-            inventorySlots.Add(inventorySlot);
-        }
+        items[slotIndex].GetComponent<GunInfo>()._currentAmmo = gunInfo._currentAmmo;
+        Destroy(currentItem);
+        currentItem = null;
     }
 }

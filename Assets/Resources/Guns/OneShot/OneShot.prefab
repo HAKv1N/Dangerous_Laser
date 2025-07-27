@@ -52,13 +52,13 @@ MonoBehaviour:
   recoilSettings:
     _verticalRecoil: 15
     _horizontalRecoil: 10
-  _maxAmmo: 7
+  _maxAmmo: 1
   _currentAmmo: 7
   _isAutomatically: 0
   _fireRate: 1.2
   _range: 100
   _damage: 100
-  _reloadRate: 4.5
+  _reloadRate: 3.8
   _lineRate: 0.7
   _gunEffects: {fileID: 1415382543972144155}
   _gunLine: {fileID: 4829029782851415962}
@@ -83,7 +83,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

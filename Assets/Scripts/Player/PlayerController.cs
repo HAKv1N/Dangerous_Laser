@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private bool isMoving;
     private bool isRunning;
     private float startFOV;
+    private Animator animator;
 
     private void Start()
     {
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
         cameraTransform = GetComponentInChildren<Camera>().GetComponent<Transform>();
         playerStats = GetComponent<PlayerStats>();
         startFOV = cameraTransform.GetComponent<Camera>().fieldOfView;
+        animator = GetComponent<Animator>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -69,6 +71,9 @@ public class PlayerController : MonoBehaviour
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, startFOV, 5 * Time.deltaTime);
             playerStats._currentStamina += playerStats._staminaPerSecond * 1.2f * Time.deltaTime;
         }
+
+        animator.SetBool("Run", isRunning);
+        animator.SetBool("Walk", isMoving);
     }
 
     private void FirstPerson()

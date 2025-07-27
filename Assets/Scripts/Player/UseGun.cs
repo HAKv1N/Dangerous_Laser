@@ -11,12 +11,17 @@ public class UseGun : MonoBehaviour
     private Transform cameraTransform;
     private bool _canShoot = true;
     private bool _canReload = true;
+    [HideInInspector] public bool _canTakeItem = true;
     private PlayerController playerController;
+    private InventoryUI inventoryUI;
+    private PlayerInventory playerInventory;
 
     private void Start()
     {
         cameraTransform = FindFirstObjectByType<Camera>().GetComponent<Transform>();
         playerController = GetComponent<PlayerController>();
+        inventoryUI = FindFirstObjectByType<InventoryUI>();
+        playerInventory = GetComponent<PlayerInventory>();
     }
 
     private void Update()
@@ -86,12 +91,7 @@ public class UseGun : MonoBehaviour
 
         gunInfo._currentAmmo--;
 
-        if (gunInfo._currentAmmo <= 0)
-        {
-            StartCoroutine(StartReload(gunInfo._reloadRate));
-
-            return;
-        }
+        inventoryUI.UpdateSlotUI(gunInfo._gunIcon, gunInfo._currentAmmo, playerInventory._currentSlotIndex);
     }
 
     IEnumerator DisableGunLine(float time)
@@ -119,13 +119,16 @@ public class UseGun : MonoBehaviour
             gunInfo._gunAnimator.SetBool("Reload", true);
             _canShoot = false;
             _canReload = false;
+            _canTakeItem = false;
 
             yield return new WaitForSeconds(_reloadRate);
 
             _canShoot = true;
             _canReload = true;
+            _canTakeItem = true;
             gunInfo._currentAmmo = gunInfo._maxAmmo;
             gunInfo._gunAnimator.SetBool("Reload", false);
+            inventoryUI.UpdateSlotUI(gunInfo._gunIcon, gunInfo._currentAmmo, playerInventory._currentSlotIndex);
         }
     }
 
