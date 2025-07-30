@@ -9,11 +9,13 @@ public class EnemyFunctional : MonoBehaviour
     private bool _canShoot = true;
     private bool _canReload = true;
     private Quaternion startRotation;
+    private Animator animator;
 
     private void Start()
     {
         playerController = FindFirstObjectByType<PlayerController>();
         enemyInfo = GetComponent<EnemyInfo>();
+        animator = GetComponent<Animator>();
 
         startRotation = transform.localRotation;
     }
@@ -56,6 +58,7 @@ public class EnemyFunctional : MonoBehaviour
         else
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, startRotation, 5 * Time.deltaTime);
+            animator.SetBool("Shoot", false);
         }
     }
 
@@ -63,14 +66,11 @@ public class EnemyFunctional : MonoBehaviour
     {
         if (!enemyInfo._agressive || !_canShoot || enemyInfo._currentAmmo <= 0) return;
 
+        animator.SetBool("Shoot", true);
+
         PlayerStats playerStats = playerController.GetComponent<PlayerStats>();
 
-        playerStats.GetDamage(enemyInfo._damage);
-
-        if (playerStats._currentHP <= 0)
-        {
-            Destroy(playerController.gameObject);
-        }
+        playerStats.GetDamage(enemyInfo._damage, gameObject);
 
         enemyInfo._currentAmmo--;
 
