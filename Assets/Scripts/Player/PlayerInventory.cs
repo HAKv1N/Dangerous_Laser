@@ -5,6 +5,7 @@ public class PlayerInventory : MonoBehaviour
 {
     [Header("Objects")]
     [SerializeField] private Transform playerHand;
+    [SerializeField] private GameObject playerArms;
     [SerializeField] private Transform inventoryTransform;
     [SerializeField] private LayerMask playerMask;
 
@@ -28,6 +29,16 @@ public class PlayerInventory : MonoBehaviour
     {
         CheckItem();
         ChooseItemOnInventory();
+
+        if (currentItem == null)
+        {
+            playerArms.SetActive(true);
+        }
+
+        else
+        {
+            playerArms.SetActive(false);
+        }
     }
 
     private void CheckItem()
