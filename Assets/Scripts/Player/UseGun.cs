@@ -9,8 +9,8 @@ public class UseGun : MonoBehaviour
     [HideInInspector] public GunInfo gunInfo;
     private float _nextFireTime;
     private Transform cameraTransform;
-    private bool _canShoot = true;
-    private bool _canReload = true;
+    [HideInInspector] public bool _canShoot = true;
+    [HideInInspector] public bool _canReload = true;
     [HideInInspector] public bool _canTakeItem = true;
     private PlayerController playerController;
     private InventoryUI inventoryUI;

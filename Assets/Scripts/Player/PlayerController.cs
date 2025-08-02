@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Objects")]
     [SerializeField] private Transform checkGround;
     [SerializeField] private LayerMask playerMask;
+    [SerializeField] private GameObject EscapeMenu;
 
     private CharacterController characterController;
     private PlayerStats playerStats;
@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private bool isRunning;
     private float startFOV;
     private Animator animator;
+    private UseGun useGun;
+    [HideInInspector] public bool _canMove;
 
     private void Start()
     {
@@ -25,17 +27,23 @@ public class PlayerController : MonoBehaviour
         playerStats = GetComponent<PlayerStats>();
         startFOV = cameraTransform.GetComponent<Camera>().fieldOfView;
         animator = GetComponent<Animator>();
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        useGun = GetComponent<UseGun>();
 
         playerStats._currentHP = playerStats._maxHP;
         playerStats._currentStamina = playerStats._maxStamina;
+        _canMove = true;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
     {
+        UpdateEscMenu();
         Velocity();
+
+        if (!_canMove) return;
+
         Move();
         FirstPerson();
     }
@@ -112,6 +120,30 @@ public class PlayerController : MonoBehaviour
         if (inGround && Input.GetKeyDown(KeyCode.Space))
         {
             velocityDirection.y = Mathf.Sqrt(playerStats._jumpPower * 2f * playerStats._gravity);
+        }
+    }
+
+    private void UpdateEscMenu()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            EscapeMenu.SetActive(!EscapeMenu.activeSelf);
+
+            if (EscapeMenu.activeSelf)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+
+            Cursor.visible = EscapeMenu.activeSelf;
+
+            useGun._canReload = !EscapeMenu.activeSelf;
+            useGun._canShoot = !EscapeMenu.activeSelf;
+            _canMove = !EscapeMenu.activeSelf;
         }
     }
 }

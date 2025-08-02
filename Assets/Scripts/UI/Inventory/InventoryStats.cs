@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StatsUI : MonoBehaviour
+public class InventoryStats : MonoBehaviour
 {
     [Header("Sliders")]
     [SerializeField] private Slider hpSlider;

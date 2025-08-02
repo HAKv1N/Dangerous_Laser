@@ -30,15 +30,7 @@ public class PlayerInventory : MonoBehaviour
         CheckItem();
         ChooseItemOnInventory();
 
-        if (currentItem == null)
-        {
-            playerArms.SetActive(true);
-        }
-
-        else
-        {
-            playerArms.SetActive(false);
-        }
+        playerArms.SetActive(!currentItem);
     }
 
     private void CheckItem()
