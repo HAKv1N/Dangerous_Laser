@@ -11,6 +11,9 @@ public class EnemyInfo : MonoBehaviour
     public float _maxAmmo;
     [HideInInspector] public float _currentAmmo;
     public float _reloadRate;
+    public ParticleSystem _shootEffects;
+    public AudioClip _shootSound;
+    public AudioSource _audioSource;
 
     private void Awake()
     {

@@ -74,6 +74,10 @@ public class EnemyFunctional : MonoBehaviour
 
         enemyInfo._currentAmmo--;
 
+        enemyInfo._shootEffects.Play();
+        enemyInfo._audioSource.clip = enemyInfo._shootSound;
+        enemyInfo._audioSource.Play();
+
         if (enemyInfo._currentAmmo <= 0 && _canReload)
         {
             StartCoroutine(StartReloadEnemy(enemyInfo._reloadRate));

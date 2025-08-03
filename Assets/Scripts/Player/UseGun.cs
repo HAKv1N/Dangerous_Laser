@@ -39,20 +39,22 @@ public class UseGun : MonoBehaviour
 
         else return;
 
-        if (_canShoot && Time.time >= _nextFireTime)
+        if (_canShoot && _nextFireTime <= 0)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0) && !gunInfo._isAutomatically)
             {
                 Shoot();
-                _nextFireTime = Time.time + gunInfo._fireRate;
+                _nextFireTime = gunInfo._fireRate;
             }
 
             else if (Input.GetKey(KeyCode.Mouse0) && gunInfo._isAutomatically)
             {
                 Shoot();
-                _nextFireTime = Time.time + gunInfo._fireRate;
+                _nextFireTime = gunInfo._fireRate;
             }
         }
+
+        _nextFireTime -= Time.deltaTime;
     }
 
     private void Shoot()
@@ -85,7 +87,7 @@ public class UseGun : MonoBehaviour
         gunInfo._gunLine.SetPosition(1, shootRay.origin + shootRay.direction * gunInfo._range);
         gunInfo._audioSource.clip = gunInfo._soundShoot;
         gunInfo._audioSource.Play();
-        gunInfo._gunEffects.Play();
+        gunInfo._shootEffects.Play();
         gunInfo._gunAnimator.SetBool("Shoot", true);
         StartCoroutine(DisableGunLine(gunInfo._lineRate));
 
@@ -117,6 +119,7 @@ public class UseGun : MonoBehaviour
             gunInfo._audioSource.clip = gunInfo._soundReload;
             gunInfo._audioSource.Play();
             gunInfo._gunAnimator.SetBool("Reload", true);
+            gunInfo._reloadEffects.Play();
             _canShoot = false;
             _canReload = false;
             _canTakeItem = false;
@@ -131,7 +134,7 @@ public class UseGun : MonoBehaviour
             inventoryUI.UpdateSlotUI(gunInfo._gunIcon, gunInfo._currentAmmo, playerInventory._currentSlotIndex);
         }
     }
-
+    
     private void Recoil()
     {
         playerController.rotationX -= gunInfo.recoilSettings._verticalRecoil;

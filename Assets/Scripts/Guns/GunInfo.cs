@@ -19,7 +19,8 @@ public class GunInfo : MonoBehaviour
     [Space]
 
     [Header("Objects")]
-    public ParticleSystem _gunEffects;
+    public ParticleSystem _shootEffects;
+    public ParticleSystem _reloadEffects;
     public LineRenderer _gunLine;
     public AudioClip _soundShoot;
     public AudioClip _soundReload;
