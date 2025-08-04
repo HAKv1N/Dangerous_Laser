@@ -75,8 +75,10 @@ public class EnemyFunctional : MonoBehaviour
         enemyInfo._currentAmmo--;
 
         enemyInfo._shootEffects.Play();
-        enemyInfo._audioSource.clip = enemyInfo._shootSound;
-        enemyInfo._audioSource.Play();
+
+        AudioSource source = GetComponent<AudioSource>();
+        source.clip = enemyInfo._shootSound;
+        source.Play();
 
         if (enemyInfo._currentAmmo <= 0 && _canReload)
         {
@@ -89,10 +91,19 @@ public class EnemyFunctional : MonoBehaviour
         _canReload = false;
         _canShoot = false;
 
+        animator.SetBool("Shoot", false);
+        animator.SetBool("Reload", true);
+
+        AudioSource source = GetComponent<AudioSource>();
+        source.clip = enemyInfo._reloadSound;
+        source.Play();
+
         yield return new WaitForSeconds(time);
 
         _canReload = true;
         _canShoot = true;
         enemyInfo._currentAmmo = enemyInfo._maxAmmo;
+
+        animator.SetBool("Reload", false);
     }
 }

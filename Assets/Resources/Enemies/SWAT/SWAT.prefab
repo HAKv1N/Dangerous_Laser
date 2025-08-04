@@ -4914,10 +4914,10 @@ MonoBehaviour:
   _fireRate: 0.3
   _maxAmmo: 20
   _currentAmmo: 20
-  _reloadRate: 3
+  _reloadRate: 4.2
   _shootEffects: {fileID: 666025197593773019}
   _shootSound: {fileID: 8300000, guid: a0031187e0eed1149aac474ec63e2eee, type: 3}
-  _audioSource: {fileID: 3063640245992764517}
+  _reloadSound: {fileID: 8300000, guid: 51728ed60cddbe146829ef8a73709a69, type: 3}
 --- !u!114 &4353398111781590701
 MonoBehaviour:
   m_ObjectHideFlags: 0

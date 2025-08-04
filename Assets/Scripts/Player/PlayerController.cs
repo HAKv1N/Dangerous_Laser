@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateEscMenu();
         Velocity();
+        Restart();
 
         if (!_canMove) return;
 
@@ -144,6 +146,14 @@ public class PlayerController : MonoBehaviour
             useGun._canReload = !EscapeMenu.activeSelf;
             useGun._canShoot = !EscapeMenu.activeSelf;
             _canMove = !EscapeMenu.activeSelf;
+        }
+    }
+
+    private void Restart()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

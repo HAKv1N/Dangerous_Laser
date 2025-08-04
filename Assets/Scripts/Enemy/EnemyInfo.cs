@@ -13,7 +13,7 @@ public class EnemyInfo : MonoBehaviour
     public float _reloadRate;
     public ParticleSystem _shootEffects;
     public AudioClip _shootSound;
-    public AudioSource _audioSource;
+    public AudioClip _reloadSound;
 
     private void Awake()
     {

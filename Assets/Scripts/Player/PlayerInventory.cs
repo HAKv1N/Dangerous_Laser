@@ -29,6 +29,7 @@ public class PlayerInventory : MonoBehaviour
     {
         CheckItem();
         ChooseItemOnInventory();
+        DropItem();
 
         playerArms.SetActive(!currentItem);
     }
@@ -42,7 +43,7 @@ public class PlayerInventory : MonoBehaviour
 
             if (Physics.Raycast(rayCheckItem, out itemHit, playerStats._rangeCheckItem, ~playerMask))
             {
-                if (itemHit.collider.CompareTag("Item") && items.Count < playerStats._maxItemsOnInventory)
+                if (itemHit.collider.CompareTag("Item"))
                 {
                     AddItemToInventory(itemHit.collider.transform);
 
@@ -54,9 +55,44 @@ public class PlayerInventory : MonoBehaviour
 
     private void AddItemToInventory(Transform item)
     {
-        if (items.Count > playerStats._maxItemsOnInventory) return;
+        bool isEmpty = true;
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i] == null)
+            {
+                isEmpty = false;
+
+                break;
+            }
+        }
+
+        if (isEmpty && items.Count >= playerStats._maxItemsOnInventory) return;
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i] == null)
+            {
+                items[i] = item.gameObject;
+
+                item.gameObject.SetActive(false);
+                item.SetParent(inventoryTransform);
+                item.localPosition = Vector3.zero;
+                item.localRotation = Quaternion.identity;
+
+                GunInfo gunInfoNew = item.GetComponent<GunInfo>();
+                inventoryUI.UpdateSlotUI(gunInfoNew._gunIcon, gunInfoNew._currentAmmo, i);
+
+                if (i == 0)
+                {
+                    TakeItemToHand(0);
+                }
+
+                return;
+            }
+        }
 
         items.Add(item.gameObject);
+
         item.gameObject.SetActive(false);
         item.SetParent(inventoryTransform);
         item.localPosition = Vector3.zero;
@@ -84,7 +120,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void TakeItemToHand(int slotIndex)
     {
-        if (slotIndex < 0 || slotIndex >= items.Count) return;
+        if (slotIndex < 0 || slotIndex >= items.Count || items[slotIndex] == null) return;
 
         if (currentItem != null && _currentSlotIndex >= 0)
         {
@@ -96,6 +132,8 @@ public class PlayerInventory : MonoBehaviour
         currentItem.transform.localPosition = Vector3.zero;
         currentItem.transform.localRotation = Quaternion.identity;
         currentItem.GetComponent<GunInfo>()._currentAmmo = items[slotIndex].GetComponent<GunInfo>()._currentAmmo;
+        currentItem.GetComponent<Rigidbody>().isKinematic = true;
+        currentItem.GetComponent<Collider>().enabled = false;
 
         _currentSlotIndex = slotIndex;
     }
@@ -105,5 +143,24 @@ public class PlayerInventory : MonoBehaviour
         items[slotIndex].GetComponent<GunInfo>()._currentAmmo = gunInfo._currentAmmo;
         Destroy(currentItem);
         currentItem = null;
+    }
+
+    private void DropItem()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && currentItem != null && useGun._canReload && useGun._canShoot)
+        {
+            currentItem.transform.SetParent(null);
+
+            Rigidbody itemRB = currentItem.GetComponent<Rigidbody>();
+            itemRB.isKinematic = false;
+            itemRB.AddForce(cameraTransform.forward * 3 + cameraTransform.up * 0.3f, ForceMode.Impulse);
+
+            currentItem.GetComponent<Collider>().enabled = true;
+
+            items[_currentSlotIndex] = null;
+            currentItem = null;
+
+            inventoryUI.UpdateSlotUI(null, 0, _currentSlotIndex);
+        }
     }
 }
