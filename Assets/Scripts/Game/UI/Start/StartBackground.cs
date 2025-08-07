@@ -1,19 +1,23 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StartBackground : MonoBehaviour
 {
-    private bool start = false;
+    private bool isStart = false;
     private Image image;
 
     private void Start()
     {
         image = GetComponent<Image>();
-        start = true;
+        image.enabled = true;
+
+        isStart = true;
     }
+
     private void Update()
     {
-        if (!start) return;
+        if (!isStart) return;
 
         UpdateBackgroundTranspency();
     }
@@ -21,13 +25,13 @@ public class StartBackground : MonoBehaviour
     private void UpdateBackgroundTranspency()
     {
         Color newColor = image.color;
-        newColor.a -= Time.deltaTime;
+        newColor.a -=  0.5f * Time.deltaTime;
 
         image.color = newColor;
 
         if (image.color.a <= 0f)
         {
-            Destroy(gameObject.transform.parent.gameObject);
+            Destroy(gameObject);
         }
     }
 }
