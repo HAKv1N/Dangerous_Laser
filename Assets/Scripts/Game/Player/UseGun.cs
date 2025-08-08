@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UseGun : MonoBehaviour
 {
     [Header("Objects")]
     [SerializeField] private Transform _playerHand;
+    [SerializeField] private GameObject damageText;
+    [SerializeField] private Transform damageDisplay;
 
     [HideInInspector] public GunInfo gunInfo;
     private float _nextFireTime;
@@ -69,11 +72,23 @@ public class UseGun : MonoBehaviour
 
         if (Physics.Raycast(shootRay, out shootHit, gunInfo._range))
         {
-            EnemyInfo enemyInfo = shootHit.collider.GetComponent<EnemyInfo>();
+            bool isHeadShot = shootHit.collider.CompareTag("Head");
+
+            EnemyInfo enemyInfo = shootHit.collider.GetComponentInParent<EnemyInfo>();
 
             if (enemyInfo != null)
             {
-                enemyInfo._currentHP -= gunInfo._damage;
+                float damage = gunInfo._damage;
+
+                if (isHeadShot)
+                {
+                    damage *= gunInfo._headshotMulti;
+                }
+
+                enemyInfo._currentHP -= damage;
+
+                GameObject newText = Instantiate(damageText, Vector3.zero, Quaternion.identity, damageDisplay);
+                newText.GetComponent<Text>().text = damage.ToString();
 
                 if (enemyInfo._currentHP <= 0)
                 {
@@ -89,6 +104,7 @@ public class UseGun : MonoBehaviour
         gunInfo._audioSource.Play();
         gunInfo._shootEffects.Play();
         gunInfo._gunAnimator.SetBool("Shoot", true);
+
         StartCoroutine(DisableGunLine(gunInfo._lineRate));
 
         gunInfo._currentAmmo--;

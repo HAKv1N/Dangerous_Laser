@@ -81,9 +81,6 @@ public class PlayerController : MonoBehaviour
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, startFOV, 5 * Time.deltaTime);
             playerStats._currentStamina += playerStats._staminaPerSecond * 1.2f * Time.deltaTime;
         }
-
-        animator.SetBool("Run", isRunning);
-        animator.SetBool("Walk", isMoving);
     }
 
     private void FirstPerson()

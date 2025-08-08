@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +24,7 @@ public class StartBackground : MonoBehaviour
     private void UpdateBackgroundTranspency()
     {
         Color newColor = image.color;
-        newColor.a -=  0.5f * Time.deltaTime;
+        newColor.a -= 0.5f * Time.deltaTime;
 
         image.color = newColor;
 

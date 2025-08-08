@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class EnemyInfo : MonoBehaviour
 {
-    public int _maxHP;
-    [HideInInspector] public int _currentHP;
+    public float _maxHP;
+    [HideInInspector] public float _currentHP;
     public bool _agressive;
     public float _rangeAttack;
     public float _damage;

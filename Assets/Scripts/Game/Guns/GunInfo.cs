@@ -15,6 +15,7 @@ public class GunInfo : MonoBehaviour
     public int _damage;
     public float _reloadRate;
     public float _lineRate;
+    public float _headshotMulti;
 
     [Space]
 

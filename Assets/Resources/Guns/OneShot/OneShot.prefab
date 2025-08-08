@@ -54,14 +54,15 @@ MonoBehaviour:
   recoilSettings:
     _verticalRecoil: 15
     _horizontalRecoil: 10
-  _maxAmmo: 1
+  _maxAmmo: 2
   _currentAmmo: 7
   _isAutomatically: 0
   _fireRate: 1.2
-  _range: 100
-  _damage: 100
+  _range: 35
+  _damage: 25
   _reloadRate: 3.8
   _lineRate: 0.7
+  _headshotMulti: 1.5
   _shootEffects: {fileID: 1415382543972144155}
   _reloadEffects: {fileID: 3561481082663801173}
   _gunLine: {fileID: 4829029782851415962}

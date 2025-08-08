@@ -22,6 +22,11 @@ public class EnemyFunctional : MonoBehaviour
 
     private void Update()
     {
+        if (playerController == null)
+        {
+            playerController = FindFirstObjectByType<PlayerController>();
+        }
+
         CheckTarget(playerController.transform);
     }
 

@@ -7,10 +7,22 @@ namespace Interface
     {
         [Header("Objects")]
         [SerializeField] private GameObject menuLevels;
+        [SerializeField] private GameObject testButton;
 
-        public void StartGame()
+        private void Start()
+        {
+            testButton.SetActive(Debug.isDebugBuild);
+        }
+
+        public void MenuLevels()
         {
             menuLevels.SetActive(!menuLevels.activeSelf);
+        }
+
+        public void StartGame(int difficulty)
+        {
+            GameSettings.DifficultyLevel = difficulty;
+
             SceneManager.LoadScene("Game");
         }
 
@@ -18,5 +30,5 @@ namespace Interface
         {
             SceneManager.LoadScene("Test");
         }
-    }    
+    }
 }
