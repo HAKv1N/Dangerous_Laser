@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
         if (inGround && velocityDirection.y < 0)
         {
-            velocityDirection.y = -0.2f;
+            velocityDirection.y = -2f;
         }
 
         else

@@ -4,7 +4,7 @@ using UnityEngine;
 public class SpawnPlayer : MonoBehaviour
 {
     [Header("Player")]
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject playerPrefab;
     
     private List<Transform> spawns = new List<Transform>();
 
@@ -22,6 +22,6 @@ public class SpawnPlayer : MonoBehaviour
 
         Transform randomSpawn = spawns[Random.Range(0, spawns.Count)];
 
-        Instantiate(player, randomSpawn.position, Quaternion.identity);
+        Instantiate(playerPrefab, randomSpawn.position, Quaternion.identity);
     }
 }
