@@ -1,59 +1,97 @@
 using System;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
     [Header("Objects")]
-    [SerializeField] private Slider[] sliders = new Slider[4];
-    [SerializeField] private Text[] texts = new Text[4];
+    [SerializeField] private Slider[] sliders;
+    [SerializeField] private Text[] texts;
+    [SerializeField] private int[] booleanSliders;
 
     private PlayerStats playerStats;
     private Camera playerCamera;
+    [HideInInspector] public bool activePostProcessing = true;
+    private SaveManager saveManager;
+
+    private void Awake()
+    {
+        saveManager = GetComponentInParent<SaveManager>();
+
+        playerCamera = FindFirstObjectByType<Camera>();
+    }
+
 
     private void Start()
     {
         playerStats = GetComponentInParent<PlayerStats>();
-        playerCamera = FindFirstObjectByType<Camera>();
 
         InitializeValues(sliders[0], playerStats._sensitivity, texts[0]);
+        InitializeValues(sliders[1], Convert.ToSingle(activePostProcessing), texts[1]);
+        InitializeValues(sliders[2], playerStats.GetComponent<PlayerController>().startFOV, texts[2]);
     }
 
     private void Update()
     {
-        UpdateTexts();
+        for (int i = 0; i < texts.Length; i++)
+        {
+            if (texts[i] == null) continue;
+            
+            UpdateText(texts[i], sliders[i].value);
+        }
     }
 
     public void AcceptChangeSensitivity()
     {
         playerStats._sensitivity = sliders[0].value;
 
-        return;
+        saveManager.Save();
     }
 
     public void AcceptChangePostProcessing()
     {
-        var cameraData = playerCamera.GetComponent<UniversalAdditionalCameraData>();
-        cameraData.renderPostProcessing = Convert.ToBoolean(sliders[1].value);
+        activePostProcessing = Convert.ToBoolean(sliders[1].value);
 
-        return;
+        var cameraData = playerCamera.GetComponent<UniversalAdditionalCameraData>();
+        cameraData.renderPostProcessing = activePostProcessing;
+
+        saveManager.Save();
+    }
+
+    public void AcceptChangeFOV()
+    {
+        playerStats.GetComponent<PlayerController>().startFOV = sliders[2].value;
+
+        saveManager.Save();
     }
 
     private void InitializeValues(Slider slider, float value, Text text)
     {
         slider.value = value;
-        text.text = value.ToString();
+        UpdateText(text, slider.value);
     }
 
-    private void UpdateTexts()
+    private void UpdateText(Text text, float value)
     {
-        for (int i = 0; i < texts.Length; i++)
-        {
-            if (texts[i] == null) return;
+        bool isBoolean = Array.Exists(booleanSliders, index => index == Array.IndexOf(texts, text));
 
-            texts[i].text = sliders[i].value.ToString("F2");
+        if (isBoolean)
+        {
+            if (value > 0.5f)
+            {
+                text.text = "ВКЛ.";
+            }
+
+            else
+            {
+                text.text = "ВЫКЛ.";
+            }
+        }
+
+        else
+        {
+            text.text = value.ToString("F2");
         }
     }
 }

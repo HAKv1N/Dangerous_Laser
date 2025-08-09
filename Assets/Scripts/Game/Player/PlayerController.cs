@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
@@ -16,19 +17,20 @@ public class PlayerController : MonoBehaviour
     private bool inGround;
     private bool isMoving;
     private bool isRunning;
-    private float startFOV;
-    private Animator animator;
+    [HideInInspector] public float startFOV = 60;
     private UseGun useGun;
     [HideInInspector] public bool _canMove;
+    private Settings settings;
 
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
         cameraTransform = GetComponentInChildren<Camera>().GetComponent<Transform>();
         playerStats = GetComponent<PlayerStats>();
-        startFOV = cameraTransform.GetComponent<Camera>().fieldOfView;
-        animator = GetComponent<Animator>();
         useGun = GetComponent<UseGun>();
+        settings = GetComponentInChildren<Settings>(includeInactive: true);
+
+        GetComponent<SaveManager>().Load();
 
         playerStats._currentHP = playerStats._maxHP;
         playerStats._currentStamina = playerStats._maxStamina;
@@ -36,6 +38,9 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        Camera playerCamera = cameraTransform.GetComponent<Camera>();
+        var cameraPostProcessing = playerCamera.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = settings.activePostProcessing;
     }
 
     private void Update()
@@ -127,6 +132,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             EscapeMenu.SetActive(!EscapeMenu.activeSelf);
+            EscapeMenu.GetComponentInChildren<Settings>().enabled = true;
 
             if (EscapeMenu.activeSelf)
             {

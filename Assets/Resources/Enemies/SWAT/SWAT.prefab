@@ -9763,6 +9763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d533d6999483cac4a9dbfa00bcff8578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  headTransform: {fileID: 5852204699459010165}
+  gunTransform: {fileID: 3465573628618228965}
 --- !u!95 &7343628742880216356
 Animator:
   serializedVersion: 7
@@ -19628,6 +19630,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ss
       objectReference: {fileID: 0}
+    - target: {fileID: 3172690137158657320, guid: caf0a6ed028da074182aec973ada3853, type: 3}
+      propertyPath: m_Name
+      value: gun
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -19673,5 +19679,10 @@ Transform:
 --- !u!4 &3465573628618228965 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2001669874434454946, guid: caf0a6ed028da074182aec973ada3853, type: 3}
+  m_PrefabInstance: {fileID: 3161365308787421511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5852204699459010165 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8856427439990263602, guid: caf0a6ed028da074182aec973ada3853, type: 3}
   m_PrefabInstance: {fileID: 3161365308787421511}
   m_PrefabAsset: {fileID: 0}

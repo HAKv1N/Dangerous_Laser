@@ -62,7 +62,12 @@ public class UseGun : MonoBehaviour
 
     private void Shoot()
     {
-        if (gunInfo._currentAmmo <= 0 || !_canShoot) return;
+        if (gunInfo._currentAmmo <= 0 || !_canShoot)
+        {
+            StartCoroutine(StartReload(gunInfo._reloadRate));
+
+            return;
+        }
 
         gunInfo._gunLine.enabled = true;
         gunInfo._gunLine.SetPosition(0, gunInfo._muzzle.position);
@@ -88,7 +93,7 @@ public class UseGun : MonoBehaviour
                 enemyInfo._currentHP -= damage;
 
                 GameObject newText = Instantiate(damageText, Vector3.zero, Quaternion.identity, damageDisplay);
-                newText.GetComponent<Text>().text = damage.ToString();
+                newText.GetComponent<Text>().text = "-" + damage + " HP";
 
                 if (enemyInfo._currentHP <= 0)
                 {
