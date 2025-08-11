@@ -6,6 +6,7 @@ public class InventoryStats : MonoBehaviour
     [Header("Sliders")]
     [SerializeField] private Slider hpSlider;
     [SerializeField] private Slider staminaSlider;
+    [SerializeField] private Text killsText;
 
     private PlayerStats playerStats;
 
@@ -26,5 +27,10 @@ public class InventoryStats : MonoBehaviour
 
         hpSlider.value = playerStats._currentHP;
         staminaSlider.value = playerStats._currentStamina;
+
+        GameManager gameManager = GetComponentInParent<GameManager>();
+        SpawnEnemy spawnEnemy = FindFirstObjectByType<SpawnEnemy>();
+
+        killsText.text = gameManager._destroyedEnemies + "/" + spawnEnemy._maxEnemies;
     }
 }

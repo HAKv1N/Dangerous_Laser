@@ -150,6 +150,7 @@ public class PlayerInventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && currentItem != null && useGun._canReload && useGun._canShoot)
         {
             currentItem.transform.SetParent(null);
+            currentItem.transform.localRotation = Quaternion.identity;
 
             Rigidbody itemRB = currentItem.GetComponent<Rigidbody>();
             itemRB.isKinematic = false;

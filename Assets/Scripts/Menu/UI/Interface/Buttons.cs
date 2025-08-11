@@ -30,5 +30,10 @@ namespace Interface
         {
             SceneManager.LoadScene("Test");
         }
+
+        public void Exit()
+        {
+            Application.Quit();
+        }
     }
 }

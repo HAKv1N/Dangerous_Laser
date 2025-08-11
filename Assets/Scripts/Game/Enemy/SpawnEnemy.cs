@@ -64,6 +64,9 @@ public class SpawnEnemy : MonoBehaviour
                 case 3:
                     SetEnemyStats(enemyInfo, 25, 8, 0.15f, 20, 3.6f, true);
                     break;
+                case 4:
+                    SetEnemyStats(enemyInfo, 30, 10, 0.1f, 25, 3, true);
+                    break;
             }
         }
     }
@@ -78,4 +81,9 @@ public class SpawnEnemy : MonoBehaviour
         enemyInfo._reloadRate = reloadRate;
         enemyInfo._agressive = isAgressive;
     }
+}
+
+public static class GameSettings
+{
+    public static int DifficultyLevel;
 }

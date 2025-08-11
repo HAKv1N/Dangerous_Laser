@@ -98,6 +98,7 @@ public class UseGun : MonoBehaviour
                 if (enemyInfo._currentHP <= 0)
                 {
                     Destroy(enemyInfo.gameObject);
+                    GetComponent<GameManager>()._destroyedEnemies++;
                 }
             }
         }

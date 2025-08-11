@@ -38840,7 +38840,7 @@ MonoBehaviour:
   _damage: 5
   _reloadRate: 3.5
   _lineRate: 0.05
-  _headshotMulti: 1.1
+  _headshotMulti: 1.5
   _shootEffects: {fileID: 7390544132155893310}
   _reloadEffects: {fileID: 1586604772380067097}
   _gunLine: {fileID: 5064768847132600393}

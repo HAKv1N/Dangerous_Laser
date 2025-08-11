@@ -62,7 +62,7 @@ MonoBehaviour:
   _damage: 25
   _reloadRate: 3.8
   _lineRate: 0.7
-  _headshotMulti: 1.5
+  _headshotMulti: 2
   _shootEffects: {fileID: 1415382543972144155}
   _reloadEffects: {fileID: 3561481082663801173}
   _gunLine: {fileID: 4829029782851415962}

@@ -25,6 +25,9 @@ public class Difficulty : MonoBehaviour
             case 3:
                 UpdateDifficultyUI(new Color(0.48f, 0, 1, 0.5f), "Insane");
                 break;
+            case 4:
+                UpdateDifficultyUI(new Color(1, 0.5f, 0, 0.5f), "Impossible");
+                break;
         }
     }
 
