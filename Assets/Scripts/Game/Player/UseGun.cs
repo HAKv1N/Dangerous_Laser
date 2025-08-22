@@ -136,7 +136,7 @@ public class UseGun : MonoBehaviour
 
     IEnumerator StartReload(float _reloadRate)
     {
-        if (_canReload && gunInfo._currentAmmo < gunInfo._maxAmmo)
+        if (_canReload && gunInfo._currentAmmo < gunInfo._maxAmmo && playerInventory.currentItem != null)
         {
             gunInfo._audioSource.clip = gunInfo._soundReload;
             gunInfo._audioSource.Play();

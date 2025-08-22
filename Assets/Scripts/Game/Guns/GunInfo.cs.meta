@@ -1,2 +1,20 @@
 fileFormatVersion: 2
 guid: 958be29894028cb45b9a3049411e746f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _shootEffects: {instanceID: 0}
+  - _reloadEffects: {instanceID: 0}
+  - _gunLine: {instanceID: 0}
+  - _soundShoot: {instanceID: 0}
+  - _soundReload: {instanceID: 0}
+  - _audioSource: {instanceID: 0}
+  - _muzzle: {instanceID: 0}
+  - _gunAnimator: {instanceID: 0}
+  - _gunIcon: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

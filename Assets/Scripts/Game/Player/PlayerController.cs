@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     private UseGun useGun;
     [HideInInspector] public bool _canMove;
     private Settings settings;
+    private float _currentSpeed;
+    private Vector3 cameraRotation;
 
     private void Start()
     {
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
 
         Camera playerCamera = cameraTransform.GetComponent<Camera>();
-        var cameraPostProcessing = playerCamera.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = settings.activePostProcessing;
+        playerCamera.GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = settings.activePostProcessing;
     }
 
     private void Update()
@@ -70,22 +72,31 @@ public class PlayerController : MonoBehaviour
         if (isRunning)
         {
             playerStats._currentStamina -= playerStats._staminaPerSecond * 2 * Time.deltaTime;
-            characterController.Move(moveDirection.normalized * playerStats._speed * 2 * Time.deltaTime);
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, startFOV + 10, 5 * Time.deltaTime);
+            _currentSpeed = playerStats._speed * 2;
+            cameraRotation.z = Mathf.Lerp(cameraRotation.z, 0, 10 * Time.deltaTime);
         }
 
         else if (isMoving)
         {
-            characterController.Move(moveDirection.normalized * playerStats._speed * Time.deltaTime);
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, startFOV + 2, 5 * Time.deltaTime);
             playerStats._currentStamina += playerStats._staminaPerSecond * 1.2f * Time.deltaTime;
+            _currentSpeed = playerStats._speed;
+            cameraRotation.z = Mathf.Lerp(cameraRotation.z, -h * 5, 10 * Time.deltaTime);
         }
 
         else
         {
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, startFOV, 5 * Time.deltaTime);
             playerStats._currentStamina += playerStats._staminaPerSecond * 1.2f * Time.deltaTime;
+            _currentSpeed = 0;
+            cameraRotation.z = Mathf.Lerp(cameraRotation.z, 0, 10 * Time.deltaTime);
         }
+
+        cameraRotation.z = Mathf.Clamp(cameraRotation.z, -5, 5);
+        cameraTransform.localRotation = Quaternion.Euler(cameraRotation);
+
+        characterController.Move(moveDirection.normalized * _currentSpeed * Time.deltaTime);
     }
 
     private void FirstPerson()
@@ -96,8 +107,9 @@ public class PlayerController : MonoBehaviour
         rotationX -= mouseY;
         rotationX = Mathf.Clamp(rotationX, -80, 80);
 
-        characterController.transform.Rotate(0, mouseX, 0);
-        cameraTransform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+        transform.Rotate(Vector3.up * mouseX);
+
+        cameraRotation.x = rotationX;
     }
 
     private void Velocity()

@@ -14,7 +14,7 @@ public class PlayerInventory : MonoBehaviour
     private PlayerStats playerStats;
     private UseGun useGun;
     private List<GameObject> items = new List<GameObject>();
-    private GameObject currentItem;
+    [HideInInspector] public GameObject currentItem;
     [HideInInspector] public int _currentSlotIndex = -1;
 
     private void Start()
