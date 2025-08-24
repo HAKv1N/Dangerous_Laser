@@ -48,13 +48,13 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         UpdateEscMenu();
-        Velocity();
         Restart();
 
         if (!_canMove) return;
 
         Move();
         FirstPerson();
+        Velocity();
     }
 
     private void Move()

@@ -49,6 +49,16 @@ public class SpawnEnemy : MonoBehaviour
         {
             switch (GameSettings.DifficultyLevel)
             {
+                case -2:
+                    SetEnemyStats(enemyInfo,
+                    GameSettings.ammo,
+                    GameSettings.damage,
+                    GameSettings.fireRate,
+                    GameSettings.rangeAttack,
+                    GameSettings.reloadRate,
+                    GameSettings.isAgressive);
+
+                    break;
                 case -1:
                     SetEnemyStats(enemyInfo, 0, 0, 0, 5, 0, false);
                     break;
@@ -86,4 +96,12 @@ public class SpawnEnemy : MonoBehaviour
 public static class GameSettings
 {
     public static int DifficultyLevel;
+
+    public static int ammo;
+    public static float damage;
+    public static float fireRate;
+    public static float rangeAttack;
+    public static float reloadRate;
+    public static bool isAgressive;
+
 }

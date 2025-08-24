@@ -158,6 +158,8 @@ public class PlayerInventory : MonoBehaviour
 
             currentItem.GetComponent<Collider>().enabled = true;
 
+            currentItem.GetComponent<GunInfo>()._audioSource.clip = null;
+
             items[_currentSlotIndex] = null;
             currentItem = null;
 

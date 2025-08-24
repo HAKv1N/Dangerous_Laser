@@ -1,13 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Difficulty : MonoBehaviour
+public class DifficultyUI : MonoBehaviour
 {
     [Header("Objects")]
     [SerializeField] private Text textDifficulty;
 
+    private Image image;
+
     private void Start()
     {
+        image = GetComponent<Image>();
+
         switch (GameSettings.DifficultyLevel)
         {
             case -1:
@@ -31,11 +35,29 @@ public class Difficulty : MonoBehaviour
         }
     }
 
+    private void Update() {
+        if (GameSettings.DifficultyLevel == -2)
+        {
+            UpdateDifficultyUIRainbow(new Color(0.5f, 0.5f, 0.5f, 1), "Custom");
+        }
+    }
+
     private void UpdateDifficultyUI(Color color, string difficulty)
     {
-        Image image = GetComponent<Image>();
-
         image.color = color;
+
+        textDifficulty.text = difficulty;
+    }
+
+    private float timer = 0f;
+
+    private void UpdateDifficultyUIRainbow(Color color, string difficulty)
+    {
+        timer += 0.1f * Time.deltaTime;
+
+        if (timer > 1f) timer -= 1f;
+
+        image.color = Color.HSVToRGB(timer, 1f, 1f);
 
         textDifficulty.text = difficulty;
     }
