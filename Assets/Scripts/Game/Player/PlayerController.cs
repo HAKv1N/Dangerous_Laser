@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
             playerStats._currentStamina -= playerStats._staminaPerSecond * 2 * Time.deltaTime;
             playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, startFOV + 10, 5 * Time.deltaTime);
             _currentSpeed = playerStats._speed * 2;
-            cameraRotation.z = Mathf.Lerp(cameraRotation.z, 0, 10 * Time.deltaTime);
+            cameraRotation.z = Mathf.Lerp(cameraRotation.z, -h * 2, 10 * Time.deltaTime);
         }
 
         else if (isMoving)
@@ -115,6 +115,13 @@ public class PlayerController : MonoBehaviour
     private void Velocity()
     {
         inGround = Physics.CheckSphere(checkGround.position, playerStats._radiusCheckGround, ~playerMask);
+
+        Ray ray = new Ray(transform.localPosition, transform.up);
+
+        if (Physics.Raycast(ray, 1, ~playerMask))
+        {
+            velocityDirection.y = -2f;
+        }
 
         if (inGround && velocityDirection.y < 0)
         {

@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyInfo : MonoBehaviour
 {
@@ -14,10 +16,18 @@ public class EnemyInfo : MonoBehaviour
     public ParticleSystem _shootEffects;
     public AudioClip _shootSound;
     public AudioClip _reloadSound;
+    public Slider slider;
+    public TextMeshProUGUI bulletsText;
 
     private void Awake()
     {
         _currentHP = _maxHP;
         _currentAmmo = _maxAmmo;
+    }
+
+    private void Update()
+    {
+        slider.value = _currentHP;
+        bulletsText.text = _currentAmmo.ToString();
     }
 }

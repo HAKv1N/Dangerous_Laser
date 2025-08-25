@@ -39259,7 +39259,7 @@ MonoBehaviour:
   _currentAmmo: 10
   _isAutomatically: 0
   _fireRate: 0.6
-  _range: 15
+  _range: 5
   _damage: 10
   _reloadRate: 0.8
   _lineRate: 0.1
@@ -39269,6 +39269,7 @@ MonoBehaviour:
   _gunLine: {fileID: 627800405634302264}
   _soundShoot: {fileID: 8300000, guid: ef1b775d7852a114f83a823f2520b99f, type: 3}
   _soundReload: {fileID: 8300000, guid: 8f202c8e7843c5842865f0e69549bbf4, type: 3}
+  _soundNoBullets: {fileID: 8300000, guid: 5d9272d2dbd421a4a9e3b23be2411597, type: 3}
   _audioSource: {fileID: 2347337686650198728}
   _muzzle: {fileID: 2687908675532533569}
   _gunAnimator: {fileID: 5695028488692916964}

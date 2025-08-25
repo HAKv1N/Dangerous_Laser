@@ -53,7 +53,7 @@ public class DifficultyUI : MonoBehaviour
 
     private void UpdateDifficultyUIRainbow(Color color, string difficulty)
     {
-        timer += 0.1f * Time.deltaTime;
+        timer += 0.2f * Time.deltaTime;
 
         if (timer > 1f) timer -= 1f;
 

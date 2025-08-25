@@ -64,7 +64,8 @@ public class UseGun : MonoBehaviour
     {
         if (gunInfo._currentAmmo <= 0 || !_canShoot)
         {
-            StartCoroutine(StartReload(gunInfo._reloadRate));
+            gunInfo._audioSource.clip = gunInfo._soundNoBullets;
+            gunInfo._audioSource.Play();
 
             return;
         }
@@ -156,7 +157,7 @@ public class UseGun : MonoBehaviour
             inventoryUI.UpdateSlotUI(gunInfo._gunIcon, gunInfo._currentAmmo, playerInventory._currentSlotIndex);
         }
     }
-    
+
     private void Recoil()
     {
         playerController.rotationX -= gunInfo.recoilSettings._verticalRecoil;

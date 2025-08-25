@@ -25,6 +25,7 @@ public class GunInfo : MonoBehaviour
     public LineRenderer _gunLine;
     public AudioClip _soundShoot;
     public AudioClip _soundReload;
+    public AudioClip _soundNoBullets;
     public AudioSource _audioSource;
     public Transform _muzzle;
     public Animator _gunAnimator;

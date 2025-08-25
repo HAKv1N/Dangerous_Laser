@@ -38832,11 +38832,11 @@ MonoBehaviour:
   recoilSettings:
     _verticalRecoil: 1.5
     _horizontalRecoil: 0.5
-  _maxAmmo: 25
+  _maxAmmo: 20
   _currentAmmo: 25
   _isAutomatically: 1
   _fireRate: 0.1
-  _range: 25
+  _range: 10
   _damage: 5
   _reloadRate: 3.5
   _lineRate: 0.05
@@ -38846,6 +38846,7 @@ MonoBehaviour:
   _gunLine: {fileID: 5064768847132600393}
   _soundShoot: {fileID: 8300000, guid: 29176e32f7642e2459b399356ed5c2e9, type: 3}
   _soundReload: {fileID: 8300000, guid: ed1e53053fbca434fabbd9ef1985dc90, type: 3}
+  _soundNoBullets: {fileID: 8300000, guid: 8297d1108fa274c40bd371ea9e96aac7, type: 3}
   _audioSource: {fileID: 1502658559374728038}
   _muzzle: {fileID: 6988137078479438979}
   _gunAnimator: {fileID: 2747671245604314032}
