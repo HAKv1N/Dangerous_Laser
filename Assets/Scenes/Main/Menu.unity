@@ -4908,7 +4908,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: FireRate (sec)
+  m_Text: Fire Rate (sec)
 --- !u!222 &1537873164
 CanvasRenderer:
   m_ObjectHideFlags: 0

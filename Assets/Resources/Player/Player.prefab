@@ -1959,7 +1959,7 @@ GameObject:
   - component: {fileID: 3318012000713035196}
   - component: {fileID: 4767684436372029968}
   - component: {fileID: 9112401613493593251}
-  - component: {fileID: 8466547496227023146}
+  - component: {fileID: 4821694093403373070}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -2112,7 +2112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f059c689be57e2c428ac568e900f0ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8466547496227023146
+--- !u!114 &4821694093403373070
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

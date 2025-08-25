@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -5,15 +6,17 @@ public class GameManager : MonoBehaviour
     private SpawnEnemy spawnEnemy;
     [HideInInspector] public int _destroyedEnemies;
     private bool isTeleported;
+    private GameObject secretRoom;
 
     private void Start()
     {
+        secretRoom = GameObject.FindGameObjectWithTag("SecretRoom");
         spawnEnemy = FindFirstObjectByType<SpawnEnemy>();
 
         isTeleported = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!isTeleported && _destroyedEnemies >= spawnEnemy._maxEnemies)
         {
@@ -23,9 +26,8 @@ public class GameManager : MonoBehaviour
 
     private void TeleportToSecretRoom()
     {
-        GameObject secretRoom = GameObject.FindGameObjectWithTag("SecretRoom");
-        transform.localPosition = secretRoom.transform.position;
-        
         isTeleported = true;
+
+        gameObject.transform.position = secretRoom.transform.position;
     }
 }
