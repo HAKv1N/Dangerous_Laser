@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI Menu Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UI Menu
+  m_TableCollectionNameGuidString: 7e1e805146818bb498dbfc69be3ebcec
+  m_Entries:
+  - m_Id: 7947952128
+    m_Key: Menu.Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 94946205696
+    m_Key: Menu.Test
+    m_Metadata:
+      m_Items: []
+  - m_Id: 100231028736
+    m_Key: Menu.Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 151053410304
+    m_Key: Levels.Easy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 173195141120
+    m_Key: Levels.Medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 190958018560
+    m_Key: Levels.Hard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 201347309568
+    m_Key: Levels.Insane
+    m_Metadata:
+      m_Items: []
+  - m_Id: 213334630400
+    m_Key: Levels.Impossible
+    m_Metadata:
+      m_Items: []
+  - m_Id: 238781472768
+    m_Key: Levels.Safe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 252547178496
+    m_Key: Levels.Custom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10898584117248
+    m_Key: CustomizeMenu.Ammo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10944796958720
+    m_Key: CustomizeMenu.Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10963323199488
+    m_Key: CustomizeMenu.FireRate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10977147625472
+    m_Key: CustomizeMenu.RangeAttack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11007640215552
+    m_Key: CustomizeMenu.ReloadRate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11026283896832
+    m_Key: CustomizeMenu.Agressive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13252565934080
+    m_Key: CustomizeMenu.Create
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8922242900297253095
+  references:
+    version: 2
+    RefIds:
+    - rid: 8922242900297253095
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1756629909076

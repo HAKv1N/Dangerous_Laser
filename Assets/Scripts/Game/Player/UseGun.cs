@@ -104,7 +104,7 @@ public class UseGun : MonoBehaviour
             }
         }
 
-        Recoil();
+        StartCoroutine(Recoil());
 
         gunInfo._gunLine.SetPosition(1, shootRay.origin + shootRay.direction * gunInfo._range);
         gunInfo._audioSource.clip = gunInfo._soundShoot;
@@ -158,11 +158,32 @@ public class UseGun : MonoBehaviour
         }
     }
 
-    private void Recoil()
+    private IEnumerator Recoil()
     {
-        playerController.rotationX -= gunInfo.recoilSettings._verticalRecoil;
-
+        float timer = 0;
+        float currentRotationX = playerController.rotationX;
+        float targetRotationX = currentRotationX - gunInfo.recoilSettings._verticalRecoil;
+        
         float horizontalRecoil = Random.Range(-gunInfo.recoilSettings._horizontalRecoil, gunInfo.recoilSettings._horizontalRecoil);
-        playerController.transform.Rotate(0, horizontalRecoil, 0);
+        float currentRotationY = playerController.transform.localEulerAngles.y;
+        float targetRotationY = currentRotationY + horizontalRecoil;
+
+        while (timer < 0.05f)
+        {
+            timer += Time.deltaTime;
+            float t = timer / 0.05f;
+            
+            playerController.rotationX = Mathf.Lerp(currentRotationX, targetRotationX, t);
+            
+            float newRotationY = Mathf.Lerp(currentRotationY, targetRotationY, t);
+            Vector3 currentRotation = playerController.transform.localEulerAngles;
+            playerController.transform.localEulerAngles = new Vector3(
+                currentRotation.x, 
+                newRotationY, 
+                currentRotation.z
+            );
+            
+            yield return null;
+        }
     }
 }

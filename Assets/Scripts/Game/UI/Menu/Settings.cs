@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
@@ -80,12 +81,14 @@ public class Settings : MonoBehaviour
         {
             if (value > 0.5f)
             {
-                text.text = "ВКЛ.";
+                if (LocalizationSettings.SelectedLocale.Identifier == "en") text.text = "On";
+                else if (LocalizationSettings.SelectedLocale.Identifier == "ru") text.text = "Вкл.";
             }
 
             else
             {
-                text.text = "ВЫКЛ.";
+                if (LocalizationSettings.SelectedLocale.Identifier == "en") text.text = "Off";
+                else if (LocalizationSettings.SelectedLocale.Identifier == "ru") text.text = "Выкл.";
             }
         }
 

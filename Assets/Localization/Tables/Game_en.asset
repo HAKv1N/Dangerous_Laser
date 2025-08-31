@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Game_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: d8aa096d930c7054cbf7d931f623ef0c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 9449512960
+    m_Localized: 'Congratulations, you''ve won! Unfortunately, there is no cool ending
+      yet:(
+
+      p.s. and most likely there won''t be, because I don''t have enough
+      time for programming anymore
+
+      Excuse me...
+
+      --->'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 252912082944
+    m_Localized: 'I don''t even know what to add, but I want to thank you for playing
+
+      --->'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 349578207232
+    m_Localized: 'Interesting facts:
+
+      1. The developer is 16 years old
+
+      2.
+      The game was made in 20 days
+
+      3. This is the only project that the author
+      has not abandoned.
+
+      4. During development, the developer did not know
+      much and studied everything gradually, do not hate, pj
+
+      --->'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 417882447872
+    m_Localized: I don't know what else to add, thanks again for playing<3
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

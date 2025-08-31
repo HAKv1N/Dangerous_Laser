@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class DifficultyUI : MonoBehaviour
@@ -12,26 +13,54 @@ public class DifficultyUI : MonoBehaviour
     {
         image = GetComponent<Image>();
 
-        switch (GameSettings.DifficultyLevel)
+        if (LocalizationSettings.SelectedLocale.Identifier == "en")
         {
-            case -1:
-                UpdateDifficultyUI(new Color(0, 1, 1, 0.5f), "Safe");
-                break;
-            case 0:
-                UpdateDifficultyUI(new Color(0, 1, 0, 0.5f), "Easy");
-                break;
-            case 1:
-                UpdateDifficultyUI(new Color(1, 1, 0, 0.5f), "Medium");
-                break;
-            case 2:
-                UpdateDifficultyUI(new Color(1, 0, 0, 0.5f), "Hard");
-                break;
-            case 3:
-                UpdateDifficultyUI(new Color(0.48f, 0, 1, 0.5f), "Insane");
-                break;
-            case 4:
-                UpdateDifficultyUI(new Color(1, 0.5f, 0, 0.5f), "Impossible");
-                break;
+            switch (GameSettings.DifficultyLevel)
+            {
+                case -1:
+                    UpdateDifficultyUI(new Color(0, 1, 1, 0.5f), "Safe");
+                    break;
+                case 0:
+                    UpdateDifficultyUI(new Color(0, 1, 0, 0.5f), "Easy");
+                    break;
+                case 1:
+                    UpdateDifficultyUI(new Color(1, 1, 0, 0.5f), "Medium");
+                    break;
+                case 2:
+                    UpdateDifficultyUI(new Color(1, 0, 0, 0.5f), "Hard");
+                    break;
+                case 3:
+                    UpdateDifficultyUI(new Color(0.48f, 0, 1, 0.5f), "Insane");
+                    break;
+                case 4:
+                    UpdateDifficultyUI(new Color(1, 0.5f, 0, 0.5f), "Impossible");
+                    break;
+            }
+        }
+
+        else if (LocalizationSettings.SelectedLocale.Identifier == "ru")
+        {
+            switch (GameSettings.DifficultyLevel)
+            {
+                case -1:
+                    UpdateDifficultyUI(new Color(0, 1, 1, 0.5f), "Безопасно");
+                    break;
+                case 0:
+                    UpdateDifficultyUI(new Color(0, 1, 0, 0.5f), "Легко");
+                    break;
+                case 1:
+                    UpdateDifficultyUI(new Color(1, 1, 0, 0.5f), "Нормально");
+                    break;
+                case 2:
+                    UpdateDifficultyUI(new Color(1, 0, 0, 0.5f), "Сложно");
+                    break;
+                case 3:
+                    UpdateDifficultyUI(new Color(0.48f, 0, 1, 0.5f), "Безумно");
+                    break;
+                case 4:
+                    UpdateDifficultyUI(new Color(1, 0.5f, 0, 0.5f), "Невозможно");
+                    break;
+            }
         }
     }
 
