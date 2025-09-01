@@ -43,6 +43,8 @@ public class PlayerStats : MonoBehaviour
 
     private void Dead(Animator animator, Transform enemyHead)
     {
+        GetComponent<PlayerController>()._canMove = false;
+
         TimelineAsset timelineAsset = playableDirector.playableAsset as TimelineAsset;
 
         CinemachineBrain brain = FindFirstObjectByType<Camera>().GetComponent<CinemachineBrain>();

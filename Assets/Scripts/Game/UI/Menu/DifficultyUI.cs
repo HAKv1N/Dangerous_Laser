@@ -13,61 +13,37 @@ public class DifficultyUI : MonoBehaviour
     {
         image = GetComponent<Image>();
 
-        if (LocalizationSettings.SelectedLocale.Identifier == "en")
+        var stringTable = LocalizationSettings.StringDatabase.GetTable("UI Menu");
+        
+        switch (GameSettings.DifficultyLevel)
         {
-            switch (GameSettings.DifficultyLevel)
-            {
-                case -1:
-                    UpdateDifficultyUI(new Color(0, 1, 1, 0.5f), "Safe");
-                    break;
-                case 0:
-                    UpdateDifficultyUI(new Color(0, 1, 0, 0.5f), "Easy");
-                    break;
-                case 1:
-                    UpdateDifficultyUI(new Color(1, 1, 0, 0.5f), "Medium");
-                    break;
-                case 2:
-                    UpdateDifficultyUI(new Color(1, 0, 0, 0.5f), "Hard");
-                    break;
-                case 3:
-                    UpdateDifficultyUI(new Color(0.48f, 0, 1, 0.5f), "Insane");
-                    break;
-                case 4:
-                    UpdateDifficultyUI(new Color(1, 0.5f, 0, 0.5f), "Impossible");
-                    break;
-            }
-        }
-
-        else if (LocalizationSettings.SelectedLocale.Identifier == "ru")
-        {
-            switch (GameSettings.DifficultyLevel)
-            {
-                case -1:
-                    UpdateDifficultyUI(new Color(0, 1, 1, 0.5f), "Безопасно");
-                    break;
-                case 0:
-                    UpdateDifficultyUI(new Color(0, 1, 0, 0.5f), "Легко");
-                    break;
-                case 1:
-                    UpdateDifficultyUI(new Color(1, 1, 0, 0.5f), "Нормально");
-                    break;
-                case 2:
-                    UpdateDifficultyUI(new Color(1, 0, 0, 0.5f), "Сложно");
-                    break;
-                case 3:
-                    UpdateDifficultyUI(new Color(0.48f, 0, 1, 0.5f), "Безумно");
-                    break;
-                case 4:
-                    UpdateDifficultyUI(new Color(1, 0.5f, 0, 0.5f), "Невозможно");
-                    break;
-            }
+            case -1:
+                UpdateDifficultyUI(new Color(0, 1, 1, 0.5f), stringTable.GetEntry("Levels.Safe").Value);
+                break;
+            case 0:
+                UpdateDifficultyUI(new Color(0, 1, 0, 0.5f), stringTable.GetEntry("Levels.Easy").Value);
+                break;
+            case 1:
+                UpdateDifficultyUI(new Color(1, 1, 0, 0.5f), stringTable.GetEntry("Levels.Medium").Value);
+                break;
+            case 2:
+                UpdateDifficultyUI(new Color(1, 0, 0, 0.5f), stringTable.GetEntry("Levels.Hard").Value);
+                break;
+            case 3:
+                UpdateDifficultyUI(new Color(0.48f, 0, 1, 0.5f), stringTable.GetEntry("Levels.Insane").Value);
+                break;
+            case 4:
+                UpdateDifficultyUI(new Color(1, 0.5f, 0, 0.5f), stringTable.GetEntry("Levels.Impossible").Value);
+                break;
         }
     }
 
     private void Update() {
         if (GameSettings.DifficultyLevel == -2)
         {
-            UpdateDifficultyUIRainbow(new Color(0.5f, 0.5f, 0.5f, 1), "Custom");
+            var stringTable = LocalizationSettings.StringDatabase.GetTable("UI Menu");
+
+            UpdateDifficultyUIRainbow(new Color(0.5f, 0.5f, 0.5f, 1), stringTable.GetEntry("Levels.Custom").Value);
         }
     }
 
@@ -79,7 +55,6 @@ public class DifficultyUI : MonoBehaviour
     }
 
     private float timer = 0f;
-
     private void UpdateDifficultyUIRainbow(Color color, string difficulty)
     {
         timer += 0.2f * Time.deltaTime;

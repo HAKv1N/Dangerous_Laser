@@ -69,7 +69,7 @@ public class EnemyFunctional : MonoBehaviour
 
     private void ShootEnemy()
     {
-        if (!enemyInfo._agressive || !_canShoot || enemyInfo._currentAmmo <= 0) return;
+        if (!enemyInfo._agressive || !_canShoot || enemyInfo._currentAmmo <= 0 || playerController.GetComponent<PlayerStats>()._currentHP <= 0) return;
 
         animator.SetBool("Shoot", true);
 
