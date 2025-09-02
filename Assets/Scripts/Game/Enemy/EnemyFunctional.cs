@@ -50,40 +50,51 @@ public class EnemyFunctional : MonoBehaviour
 
                     if (Time.time > _nextFireTime)
                     {
-                        ShootEnemy();
+                        ShootEnemy((int)distanceToTarget * 4);
 
                         _nextFireTime = Time.time + enemyInfo._fireRate;
 
                         return;
                     }
                 }
-            }
-        }
 
-        else
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, startRotation, 5 * Time.deltaTime);
-            animator.SetBool("Shoot", false);
+                else
+                {
+                    transform.rotation = Quaternion.Slerp(transform.rotation, startRotation, 5 * Time.deltaTime);
+                    animator.SetBool("Shoot", false);
+                }
+            }
         }
     }
 
-    private void ShootEnemy()
+    private void ShootEnemy(int _missChance)
     {
         if (!enemyInfo._agressive || !_canShoot || enemyInfo._currentAmmo <= 0 || playerController.GetComponent<PlayerStats>()._currentHP <= 0) return;
 
+        AudioSource source = GetComponent<AudioSource>();
+
         animator.SetBool("Shoot", true);
+
+        enemyInfo._shootEffects.Play();
+
+        int _missNumber = Random.Range(1, 100);
+
+        if (_missNumber <= _missChance)
+        {
+            source.clip = enemyInfo._missSound;
+            source.Play();
+
+            return;
+        }
+
+        source.clip = enemyInfo._shootSound;
+        source.Play();
 
         PlayerStats playerStats = playerController.GetComponent<PlayerStats>();
 
         playerStats.GetDamage(enemyInfo._damage, gameObject);
 
         enemyInfo._currentAmmo--;
-
-        enemyInfo._shootEffects.Play();
-
-        AudioSource source = GetComponent<AudioSource>();
-        source.clip = enemyInfo._shootSound;
-        source.Play();
 
         if (enemyInfo._currentAmmo <= 0 && _canReload)
         {

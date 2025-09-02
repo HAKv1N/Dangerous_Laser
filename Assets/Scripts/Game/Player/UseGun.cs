@@ -149,7 +149,7 @@ public class UseGun : MonoBehaviour
 
             yield return new WaitForSeconds(_reloadRate);
 
-            _canShoot = true;
+            _canShoot = !GetComponent<PlayerController>().escapeMenu.activeSelf;
             _canReload = true;
             _canTakeItem = true;
             gunInfo._currentAmmo = gunInfo._maxAmmo;

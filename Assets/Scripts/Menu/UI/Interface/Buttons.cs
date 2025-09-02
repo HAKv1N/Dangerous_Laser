@@ -22,11 +22,33 @@ namespace Interface
 
         private void Update()
         {
-            if (customizeMenu.activeSelf && Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+            if (customizeMenu.activeSelf && Input.GetMouseButtonDown(0) && !IsPointerOverCustomizeMenuOrParents())
             {
                 customizeMenu.SetActive(false);
             }
         }
+
+        private bool IsPointerOverCustomizeMenuOrParents()
+        {
+            PointerEventData eventData = new PointerEventData(EventSystem.current)
+            {
+                position = Input.mousePosition
+            };
+            
+            var results = new System.Collections.Generic.List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+            
+            foreach (var result in results)
+            {
+                if (result.gameObject == customizeMenu)
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
 
         public void MenuLevels()
         {

@@ -2071,7 +2071,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 64
-  EscapeMenu: {fileID: 4032082177247587992}
+  escapeMenu: {fileID: 4032082177247587992}
   rotationX: 0
   startFOV: 60
   _canMove: 0

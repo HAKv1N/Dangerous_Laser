@@ -10070,7 +10070,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -10102,6 +10102,7 @@ MonoBehaviour:
   _shootEffects: {fileID: 3560095018980114194}
   _shootSound: {fileID: 8300000, guid: a0031187e0eed1149aac474ec63e2eee, type: 3}
   _reloadSound: {fileID: 8300000, guid: 51728ed60cddbe146829ef8a73709a69, type: 3}
+  _missSound: {fileID: 8300000, guid: 8eeb1efa4fdcb4144b6b2ddba68783b0, type: 3}
   slider: {fileID: 853183977538380610}
   bulletsText: {fileID: 8687721659497041070}
 --- !u!114 &7114530724972522309

@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [Header("Objects")]
     [SerializeField] private Transform checkGround;
     [SerializeField] private LayerMask playerMask;
-    [SerializeField] private GameObject EscapeMenu;
+    [SerializeField] public GameObject escapeMenu;
 
     private CharacterController characterController;
     private PlayerStats playerStats;
@@ -150,10 +150,10 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            EscapeMenu.SetActive(!EscapeMenu.activeSelf);
-            EscapeMenu.GetComponentInChildren<Settings>().enabled = true;
+            escapeMenu.SetActive(!escapeMenu.activeSelf);
+            escapeMenu.GetComponentInChildren<Settings>().enabled = true;
 
-            if (EscapeMenu.activeSelf)
+            if (escapeMenu.activeSelf)
             {
                 Cursor.lockState = CursorLockMode.None;
             }
@@ -163,11 +163,11 @@ public class PlayerController : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
             }
 
-            Cursor.visible = EscapeMenu.activeSelf;
+            Cursor.visible = escapeMenu.activeSelf;
 
-            useGun._canReload = !EscapeMenu.activeSelf;
-            useGun._canShoot = !EscapeMenu.activeSelf;
-            _canMove = !EscapeMenu.activeSelf;
+            useGun._canReload = !escapeMenu.activeSelf;
+            useGun._canShoot = !escapeMenu.activeSelf;
+            _canMove = !escapeMenu.activeSelf;
         }
     }
 

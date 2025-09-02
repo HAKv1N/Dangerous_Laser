@@ -16,6 +16,7 @@ public class EnemyInfo : MonoBehaviour
     public ParticleSystem _shootEffects;
     public AudioClip _shootSound;
     public AudioClip _reloadSound;
+    public AudioClip _missSound;
     public Slider slider;
     public TextMeshProUGUI bulletsText;
 
