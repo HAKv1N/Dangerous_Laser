@@ -27,5 +27,15 @@ public class InventoryUI : MonoBehaviour
     {
         slots[slotIndex].icon.sprite = newIcon;
         slots[slotIndex].bulletsText.text = bullets.ToString();
+
+        if (newIcon == null)
+        {
+            slots[slotIndex].icon.color = new Color(0, 0, 0, 0);
+        }
+
+        else
+        {
+            slots[slotIndex].icon.color = new Color(0, 0, 0, 1);
+        }
     }
 }
